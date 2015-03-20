@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 # Example:
-#   ./create --org gilt --app quality --db_name quality --db_user api
+#   ./create --name myapp
 #
 # All parameters are optional - you will be prompted to specify each as needed
 
@@ -61,21 +61,12 @@ if !system("which apidoc")
 end
 
 name = args[:name] || ask("name")
-apidoc_org = args[:apidoc_org] || ask("apidoc org", "gilt")
+apidoc_org = args[:apidoc_org] || "gilt"
+apidoc_app = args[:apidoc_app] || "play-apidoc"
 
-if apidoc_app = args[:apidoc_app]
-  if !app_exists?(apidoc_org, apidoc_app)
-    puts "ERROR: Application #{apidoc_org}/#{apidoc_app} not found"
-    exit(1)
-  end
-else
-  while apidoc_app.nil?
-    apidoc_app = ask("apidoc application")
-    if !app_exists?(apidoc_org, apidoc_app)
-      puts "  ERROR: #{apidoc_org}/#{apidoc_app} not found in apidoc"
-      apidoc_app = nil
-    end
-  end
+if !app_exists?(apidoc_org, apidoc_app)
+  puts "ERROR: Application #{apidoc_org}/#{apidoc_app} not found"
+  exit(1)
 end
 
 target = "/tmp/#{apidoc_org}-#{apidoc_app}.#{Process.pid}"
@@ -83,8 +74,8 @@ target = "/tmp/#{apidoc_org}-#{apidoc_app}.#{Process.pid}"
 copier = PlayApidoc::Copier.new(:name => name,
                                 :apidoc_org => apidoc_org,
                                 :apidoc_app => apidoc_app,
-                                :db_name => args[:db_name] || ask("database name", apidoc_app.split("\-").first),
-                                :db_user => args[:db_user] || ask("database user", "api"),
+                                :db_name => args[:db_name] || name,
+                                :db_user => args[:db_user] || "api",
                                 :scala_version => versions[:scala],
                                 :sbt_version => versions[:sbt],
                                 :play_version => versions[:play]

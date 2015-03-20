@@ -8,7 +8,11 @@ This is a template for generating a play project that provides:
 
 ## Usage
 
-  ./create
+  ./create --name myapp
+
+  ./create --name myapp --db_name foo --db_user api
+
+  ./create --name myapp --db_name foo --db_user api --apidoc_org gilt --apidoc_app quality
 
 ## Dependencies
 
