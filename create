@@ -21,13 +21,13 @@ def ask(message, default=nil)
   response
 end
 
-def versions(org, app)
-  cmd = "apidoc list versions #{org} #{app}"
-  `#{cmd}`.strip.split
+def latest_version(org, app)
+  cmd = "export LIMIT=1 && apidoc list versions #{org} #{app}"
+  `#{cmd}`.strip.split.first
 end
 
 def app_exists?(org, app)
-  !versions(org, app).empty?
+  latest_version(org, app).nil? ? false : true
 end
 
 if !system("which apidoc")
@@ -55,3 +55,5 @@ else
 end
 
 puts "%s/%s" % [org, app]
+
+
