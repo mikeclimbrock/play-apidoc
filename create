@@ -3,3 +3,55 @@
 load File.join(File.dirname(__FILE__), 'lib/play-apidoc.rb')
 
 args = PlayApidoc::Args.parse(ARGV)
+
+def ask(message, default=nil)
+  response = nil
+  while response.to_s.strip == ""
+    print message
+    if default
+      print " [#{default}]"
+    end
+    print ": "
+
+    response = $stdin.gets.strip
+    if response == ""
+      response = default
+    end
+  end
+  response
+end
+
+def versions(org, app)
+  cmd = "apidoc list versions #{org} #{app}"
+  `#{cmd}`.strip.split
+end
+
+def app_exists?(org, app)
+  !versions(org, app).empty?
+end
+
+if !system("which apidoc")
+  puts "ERROR: Could not find apidoc-cli"
+  puts "  Please install apidoc-cli and ensure the apidoc command is in your path."
+  puts "  See https://github.com/gilt/apidoc-cli"
+  exit(1)
+end
+
+org = args[:org] || ask("apidoc org", "gilt")
+
+if app = args[:app]
+  if !app_exists?(org, app)
+    puts "ERROR: Application #{org}/#{app} not found"
+    exit(1)
+  end
+else
+  while app.nil?
+    app = ask("apidoc application")
+    if !app_exists?(org, app)
+      puts "  ERROR: #{org}/#{app} not found in apidoc"
+      app = nil
+    end
+  end
+end
+
+puts "%s/%s" % [org, app]
