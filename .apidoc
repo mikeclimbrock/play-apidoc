@@ -1,0 +1,4 @@
+upload:
+  gilt:
+    play-apidoc:
+      path: api.json

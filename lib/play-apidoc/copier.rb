@@ -2,7 +2,7 @@ module PlayApidoc
 
   class Copier
 
-    TEXT_EXTENSIONS = ['apidoc', 'html', 'scala']
+    TEXT_EXTENSIONS = ['apidoc', 'conf', 'html', 'scala']
 
     def initialize(variables)
       @variables = variables

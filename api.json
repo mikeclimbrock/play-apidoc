@@ -1,0 +1,33 @@
+{
+    "name": "play-apidoc",
+
+    "models": {
+
+	"healthcheck": {
+	    "fields": [
+                { "name": "status", "type": "string", "example": "healthy" }
+	    ]
+	}
+
+    },
+
+    "resources": {
+
+	"healthcheck": {
+	    "path": "/_internal_/healthcheck",
+            "operations": [
+                {
+                    "method": "GET",
+                    "responses": {
+                        "200": { "type": "healthcheck" }
+                    }
+                }
+	    ]
+	}
+
+    }
+
+}
+
+    
+  
