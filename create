@@ -42,6 +42,17 @@ def app_exists?(org, app)
   latest_version(org, app).nil? ? false : true
 end
 
+def get_package_name(path)
+  IO.readlines(path).each do |l|
+    l.strip!
+    if l.match(/^package/)
+      return l.split[1].sub(/\.models$/, '')
+    end
+  end
+
+  raise "Could not find package name from file at #{path}"
+end
+
 if !system("which apidoc")
   puts "ERROR: Could not find apidoc-cli"
   puts "  Please install apidoc-cli and ensure the apidoc command is in your path."
@@ -85,11 +96,15 @@ copier.copy_dir("template", target)
 puts ""
 
 Dir.chdir(target) do
-  system("apidoc update")
+  if !system("apidoc update")
+    puts "ERROR: apidoc update failed"
+    puts ""
+    exit(1)
+  end
 end
 
 ## Find package name
-package_name = "com.gilt.play.apidoc.v0"
+package_name = get_package_name(File.join(target, "generated/app/ApidocApi.scala"))
 
 puts ""
 puts "Substituting package name[#{package_name}]"
