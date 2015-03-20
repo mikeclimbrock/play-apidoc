@@ -9,6 +9,12 @@ load File.join(File.dirname(__FILE__), 'lib/play-apidoc.rb')
 
 args = PlayApidoc::Args.parse(ARGV)
 
+versions = {
+  :scala => "2.11.6",
+  :sbt => "0.13.7",
+  :play => "2.3.8"
+}
+
 def ask(message, default=nil)
   response = nil
   while response.to_s.strip == ""
@@ -67,7 +73,11 @@ copier = PlayApidoc::Copier.new(:name => name,
                                 :apidoc_org => apidoc_org,
                                 :apidoc_app => apidoc_app,
                                 :db_name => args[:db_name] || ask("database name", apidoc_app.split("\-").first),
-                                :db_user => args[:db_user] || ask("database user", "api"))
+                                :db_user => args[:db_user] || ask("database user", "api"),
+                                :scala_version => versions[:scala],
+                                :sbt_version => versions[:sbt],
+                                :play_version => versions[:play]
+                                )
 
 puts "Copying template to #{target}"
 copier.mkdir(target)

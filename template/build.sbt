@@ -3,7 +3,7 @@ import scoverage.ScoverageSbtPlugin.ScoverageKeys._
 
 name := "%%NAME%%"
 
-scalaVersion in ThisBuild := "2.11.5"
+scalaVersion in ThisBuild := "%%SCALA_VERSION%%"
 
 // required because of issue between scoverage & sbt
 parallelExecution in Test in ThisBuild := true
