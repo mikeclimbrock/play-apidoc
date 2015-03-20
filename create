@@ -1,5 +1,10 @@
 #!/usr/bin/env ruby
 
+# Example:
+#   ./create --org gilt --app quality --db_name quality --db_user api
+#
+# All parameters are optional - you will be prompted to specify each as needed
+
 load File.join(File.dirname(__FILE__), 'lib/play-apidoc.rb')
 
 args = PlayApidoc::Args.parse(ARGV)
@@ -22,6 +27,7 @@ def ask(message, default=nil)
 end
 
 def latest_version(org, app)
+  return "test"
   cmd = "export LIMIT=1 && apidoc list versions #{org} #{app}"
   `#{cmd}`.strip.split.first
 end
@@ -54,6 +60,23 @@ else
   end
 end
 
-puts "%s/%s" % [org, app]
+copier = PlayApidoc::Copier.new(:apidoc_org => org,
+                                :apidoc_app => app,
+                                :db_name => args[:db_name] || ask("database name", app.split("\-").first),
+                                :db_user => args[:db_user] || ask("database user", "api"))
 
+target = "/tmp/#{org}-#{app}.#{Process.pid}"
+
+puts "Copying template to #{target}"
+copier.mkdir(target)
+copier.copy_dir("template", target)
+puts ""
+
+Dir.chdir(target) do
+  system("apidoc update")
+end
+
+puts ""
+puts "Application bootstrapped to #{target}"
+puts ""
 
