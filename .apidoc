@@ -1,0 +1,12 @@
+upload:
+  gilt:
+    activator-gilt-play-api:
+      path: api/api.json
+
+code:
+  gilt:
+    activator-gilt-play-api:
+      version: latest
+      generators:
+        play_2_3_client: generated/app/ApidocApi.scala
+        play_2_x_routes: api/conf/routes
