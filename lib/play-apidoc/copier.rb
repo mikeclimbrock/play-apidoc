@@ -14,11 +14,13 @@ module PlayApidoc
 
     def copy_file(source, target)
       if text_file?(source)
-        File.open(target, "w") do |out|
+        tmp = "/tmp/apidoc.copier.#{Process.pid}"
+        File.open(tmp, "w") do |out|
           IO.readlines(source).each do |l|
             out << substitute(l)
           end
         end
+        `mv #{tmp} #{target}`
       else
         `cp #{source} #{target}`
       end
