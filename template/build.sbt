@@ -41,7 +41,11 @@ lazy val www = project
   .enablePlugins(PlayScala)
   .settings(commonSettings: _*)
   .settings(
-    routesImport += "%%PACKAGE_NAME%%.Bindables._"
+    routesImport += "%%PACKAGE_NAME%%.Bindables._",
+    libraryDependencies ++= Seq(
+      "org.webjars" %% "webjars-play" % "2.3.0-3",
+      "org.webjars" % "bootstrap" % "3.3.4"
+    )
   )
 
 lazy val commonSettings: Seq[Setting[_]] = Seq(
