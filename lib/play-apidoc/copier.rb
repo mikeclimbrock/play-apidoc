@@ -2,7 +2,7 @@ module PlayApidoc
 
   class Copier
 
-    TEXT_EXTENSIONS = ['apidoc', 'conf', 'html', 'scala']
+    TEXT_EXTENSIONS = ['apidoc', 'conf', 'html', 'scala', 'sbt']
 
     def initialize(variables)
       @variables = variables
@@ -22,7 +22,9 @@ module PlayApidoc
         end
         `mv #{tmp} #{target}`
       else
-        `cp #{source} #{target}`
+        if source != target
+          `cp #{source} #{target}`
+        end
       end
     end
 

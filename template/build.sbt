@@ -1,9 +1,7 @@
 import play.PlayImport.PlayKeys._
 import scoverage.ScoverageSbtPlugin.ScoverageKeys._
 
-name := "activator-gilt-play"
-
-organization := "com.gilt.activator-gilt-play"
+name := "%%NAME%%"
 
 scalaVersion in ThisBuild := "2.11.5"
 
@@ -26,7 +24,7 @@ lazy val api = project
   .enablePlugins(PlayScala)
   .settings(commonSettings: _*)
   .settings(
-    // routesImport += "com.gilt.xxx.v0.Bindables._",
+    routesImport += "%%PACKAGE_NAME%%.Bindables._",
     libraryDependencies ++= Seq(
       ws,
       jdbc,
@@ -43,12 +41,11 @@ lazy val www = project
   .enablePlugins(PlayScala)
   .settings(commonSettings: _*)
   .settings(
-    // routesImport += "com.gilt.xxx.v0.Bindables._"
+    routesImport += "%%PACKAGE_NAME%%.Bindables._"
   )
 
 lazy val commonSettings: Seq[Setting[_]] = Seq(
-  name <<= name("apidoc-" + _),
-  organization := "com.gilt.apidoc",
+  name <<= name("%%NAME%%-" + _),
   libraryDependencies ++= Seq(
     "org.scalatest" %% "scalatest" % "2.2.0" % "test"
   ),

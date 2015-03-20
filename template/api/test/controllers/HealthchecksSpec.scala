@@ -17,7 +17,11 @@ class HealthchecksSpec extends PlaySpec with OneServerPerSuite {
   lazy val client = new Client(s"http://localhost:$port")
 
   "GET /_internal_/healthcheck" in new WithServer {
-    await(client.healthchecks.getInternalAndHealthcheck()) must be(Some(Healthcheck("healthy")))
+    await(
+      client.healthchecks.getInternalAndHealthcheck()
+    ) must be(
+      Some(Healthcheck("healthy"))
+    )
   }
 
 }
