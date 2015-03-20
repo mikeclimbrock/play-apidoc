@@ -1,3 +1,4 @@
+GET     /                           controllers.ApplicationController.index()
 GET     /_internal_/healthcheck     controllers.HealthchecksController.index()
 
 
