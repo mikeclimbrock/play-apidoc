@@ -33,7 +33,6 @@ def ask(message, default=nil)
 end
 
 def latest_version(org, app)
-  return "test"
   cmd = "export LIMIT=1 && apidoc list versions #{org} #{app}"
   `#{cmd}`.strip.split.first
 end
