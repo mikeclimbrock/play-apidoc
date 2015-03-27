@@ -63,10 +63,16 @@ name = args[:name] || ask("name")
 apidoc_org = args[:apidoc_org] || "gilt"
 apidoc_app = args[:apidoc_app] || "play-apidoc"
 
+print "Confirming that apidoc application #{apidoc_org}/#{apidoc_app} exists..."
+
 if !app_exists?(apidoc_org, apidoc_app)
+  puts ""
   puts "ERROR: Application #{apidoc_org}/#{apidoc_app} not found"
   exit(1)
 end
+
+puts "done"
+puts ""
 
 target = "/tmp/#{apidoc_org}-#{apidoc_app}.#{Process.pid}"
 
