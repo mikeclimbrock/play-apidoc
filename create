@@ -101,6 +101,6 @@ puts "Substituting package name[#{package_name}]"
 PlayApidoc::Copier.new(:package_name => package_name).copy_dir(target, target)
 
 puts ""
-puts "Application bootstrapped to #{target}"
+puts "Done. See #{target}"
 puts ""
 
