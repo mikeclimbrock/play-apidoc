@@ -74,7 +74,10 @@ end
 puts "done"
 puts ""
 
-target = "/tmp/#{apidoc_org}-#{apidoc_app}.#{Process.pid}"
+target = "/tmp/#{name}"
+if File.exists?(target)
+  target << ".#{Process.pid}"
+end
 
 copier = PlayApidoc::Copier.new(:name => name,
                                 :apidoc_org => apidoc_org,
