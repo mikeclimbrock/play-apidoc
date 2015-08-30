@@ -16,7 +16,7 @@ This is a template for generating a play project that provides:
 
 ## Dependencies
 
-  1. http://github.com/gilt/apidoc-cli
+  1. http://github.com/mbryzek/apidoc-cli
 
 
 ## License

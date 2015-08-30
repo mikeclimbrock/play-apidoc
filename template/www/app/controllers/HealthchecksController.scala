@@ -1,7 +1,7 @@
 package controllers
 
-import com.gilt.play.apidoc.v0.models.Healthcheck
-import com.gilt.play.apidoc.v0.models.json._
+import %%PACKAGE_NAME%%.models.Healthcheck
+import %%PACKAGE_NAME%%.models.json._
 
 import play.api._
 import play.api.mvc._
