@@ -28,8 +28,8 @@ lazy val api = project
     libraryDependencies ++= Seq(
       ws,
       jdbc,
-      anorm,
-      "org.postgresql" % "postgresql"    % "9.3-1101-jdbc4",
+      "com.typesafe.play" %% "anorm" % "2.4.0",
+      "org.postgresql" % "postgresql" % "9.4-1202-jdbc42",
       "org.scalatestplus" %% "play" % "1.2.0" % "test"
     )
   )
@@ -43,9 +43,9 @@ lazy val www = project
   .settings(
     routesImport += "%%PACKAGE_NAME%%.Bindables._",
     libraryDependencies ++= Seq(
-      "org.webjars" %% "webjars-play" % "2.3.0-3",
-      "org.webjars" % "bootstrap" % "3.3.4",
-      "org.webjars" % "jquery" % "2.1.3"
+      "org.webjars" %% "webjars-play" % "2.4.0-1",
+      "org.webjars" % "bootstrap" % "3.3.5",
+      "org.webjars" % "jquery" % "2.1.4"
     )
   )
 
