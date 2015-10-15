@@ -12,7 +12,7 @@ This is a template for generating a play project that provides:
 
   ./create --name myapp --db_name foo --db_user api
 
-  ./create --name myapp --db_name foo --db_user api --apidoc_org gilt --apidoc_app quality
+  ./create --name myapp --db_name foo --db_user api --apidoc_org bryzek --apidoc_app quality
 
 ## Dependencies
 
