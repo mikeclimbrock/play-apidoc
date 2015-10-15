@@ -17,8 +17,8 @@ apidoc. To regenerate code, clone github.com/mbryzek/apidoc-cli and
 Database
 ========
 
-    psql -c "create role api login createdb" postgres
-    psql -U api -c "CREATE DATABASE play" postgres
+    psql -c "create role %%DB_USER%% login createdb" postgres
+    psql -U api -c "CREATE DATABASE %%DB_NAME%%" postgres
 
 Database
 ========
