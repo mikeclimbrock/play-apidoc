@@ -12,7 +12,8 @@ args = PlayApidoc::Args.parse(ARGV)
 versions = {
   :scala => "2.11.7",
   :sbt => "0.13.9",
-  :play => "2.4.2"
+  :play => "2.4.2",
+  :scalatestplus => "1.4.0-M4"
 }
 
 def ask(message, default=nil)
@@ -87,7 +88,8 @@ copier = PlayApidoc::Copier.new(:name => name,
                                 :db_user => args[:db_user] || "api",
                                 :scala_version => versions[:scala],
                                 :sbt_version => versions[:sbt],
-                                :play_version => versions[:play]
+                                :play_version => versions[:play],
+                                :scalatestplus_version => versions[:scalatestplus]
                                 )
 
 puts "Copying template to #{target}"
