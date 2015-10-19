@@ -12,7 +12,7 @@ args = PlayApidoc::Args.parse(ARGV)
 versions = {
   :scala => "2.11.7",
   :sbt => "0.13.9",
-  :play => "2.4.2",
+  :play => "2.4.3",
   :scalatestplus => "1.4.0-M4"
 }
 
