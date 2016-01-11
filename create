@@ -61,7 +61,7 @@ if !system("which apidoc")
 end
 
 name = args[:name] || ask("apidoc application name")
-apidoc_org = args[:apidoc_org] || ask("apidoc organiation key")
+apidoc_org = args[:apidoc_org] || ask("apidoc organization key")
 apidoc_app = args[:apidoc_app] || name
 
 print "Confirming that apidoc application #{apidoc_org}/#{apidoc_app} exists..."
@@ -76,7 +76,7 @@ end
 puts "done"
 puts ""
 
-target = "/tmp/#{name}"
+target = "/tmp/play-apidoc.#{name}"
 if File.exists?(target)
   target << ".#{Process.pid}"
 end
@@ -98,19 +98,23 @@ copier.copy_dir("template", target)
 puts ""
 
 Dir.chdir(target) do
+  system("mkdir -p generated/app")
   if !system("apidoc update")
     puts "ERROR: apidoc update failed"
     puts ""
     exit(1)
   end
+
+  ## Find package name
+
+  if path = Dir.glob("generated/app/*scala").first
+    package_name = get_package_name(File.join(target, path))
+
+    puts ""
+    puts "Substituting package name[#{package_name}]"
+    PlayApidoc::Copier.new(:package_name => package_name).copy_dir(target, target)
+  end
 end
-
-## Find package name
-package_name = get_package_name(File.join(target, "generated/app/ApidocApi.scala"))
-
-puts ""
-puts "Substituting package name[#{package_name}]"
-PlayApidoc::Copier.new(:package_name => package_name).copy_dir(target, target)
 
 puts ""
 puts "Done. See #{target}"

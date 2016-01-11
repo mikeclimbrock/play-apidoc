@@ -1,12 +1,7 @@
-upload:
-  %%APIDOC_ORG%%:
-    %%APIDOC_APP%%:
-      path: api/api.json
-
 code:
   %%APIDOC_ORG%%:
     %%APIDOC_APP%%:
       version: latest
       generators:
-        play_2_4_client: generated/app/ApidocApi.scala
+        play_2_4_client: generated/app
         play_2_x_routes: api/conf/routes
