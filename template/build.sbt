@@ -1,5 +1,8 @@
 import play.PlayImport.PlayKeys._
 import scoverage.ScoverageSbtPlugin.ScoverageKeys._
+import scalariform.formatter.preferences._
+import com.typesafe.sbt.SbtScalariform
+import com.typesafe.sbt.SbtScalariform.ScalariformKeys
 
 name := "%%NAME%%"
 
@@ -57,3 +60,10 @@ lazy val commonSettings: Seq[Setting[_]] = Seq(
   scalacOptions += "-feature",
   coverageHighlighting := true
 )
+
+scalariformSettings
+
+ScalariformKeys.preferences := ScalariformKeys.preferences.value
+  .setPreference( AlignSingleLineCaseStatements, true )
+  .setPreference( DoubleIndentClassDeclaration, true )
+  .setPreference( IndentSpaces, 2 )
