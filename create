@@ -13,7 +13,7 @@ versions = {
   :scala => "2.11.7",
   :sbt => "0.13.9",
   :play => "2.4.3",
-  :scalatestplus => "1.4.0-M4"
+  :scalatestplus => "1.4.0"
 }
 
 def ask(message, default=nil)
