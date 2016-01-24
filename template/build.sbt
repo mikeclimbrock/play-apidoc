@@ -25,6 +25,7 @@ lazy val api = project
   .settings(commonSettings: _*)
   .settings(
     routesImport += "%%PACKAGE_NAME%%.Bindables._",
+    routesGenerator := InjectedRoutesGenerator,
     libraryDependencies ++= Seq(
       ws,
       jdbc,
@@ -42,6 +43,7 @@ lazy val www = project
   .settings(commonSettings: _*)
   .settings(
     routesImport += "%%PACKAGE_NAME%%.Bindables._",
+    routesGenerator := InjectedRoutesGenerator,
     libraryDependencies ++= Seq(
       "org.webjars" %% "webjars-play" % "2.4.0-2",
       "org.webjars" % "bootstrap" % "3.3.6",
