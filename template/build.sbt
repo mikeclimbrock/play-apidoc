@@ -54,6 +54,7 @@ lazy val www = project
 lazy val commonSettings: Seq[Setting[_]] = Seq(
   name <<= name("%%NAME%%-" + _),
   libraryDependencies ++= Seq(
+    specs2 % Test,
     "org.scalatest" %% "scalatest" % "2.2.6" % "test"
   ),
   scalacOptions += "-feature",
