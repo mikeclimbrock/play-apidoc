@@ -11,7 +11,7 @@ object Healthchecks extends Controller {
 
   private val HealthyJson = Json.toJson(Healthcheck(status = "healthy"))
 
-  def getInternalAndHealthcheck() = Action { request =>
+  def getHealthcheck() = Action { request =>
     Ok(HealthyJson)
   }
 

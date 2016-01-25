@@ -18,7 +18,7 @@ class HealthchecksSpec extends PlaySpec with OneServerPerSuite {
 
   "GET /_internal_/healthcheck" in new WithServer {
     await(
-      client.healthchecks.getInternalAndHealthcheck()
+      client.healthchecks.getHealthcheck()
     ) must beEqualTo(
       Some(Healthcheck("healthy"))
     )
