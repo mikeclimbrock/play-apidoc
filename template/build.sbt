@@ -35,22 +35,6 @@ lazy val api = project
     )
   )
 
-lazy val www = project
-  .in(file("www"))
-  .dependsOn(generated)
-  .aggregate(generated)
-  .enablePlugins(PlayScala)
-  .settings(commonSettings: _*)
-  .settings(
-    routesImport += "%%PACKAGE_NAME%%.Bindables._",
-    routesGenerator := InjectedRoutesGenerator,
-    libraryDependencies ++= Seq(
-      "org.webjars" %% "webjars-play" % "2.4.0-2",
-      "org.webjars" % "bootstrap" % "3.3.6",
-      "org.webjars" % "jquery" % "2.1.4"
-    )
-  )
-
 lazy val commonSettings: Seq[Setting[_]] = Seq(
   name <<= name("%%NAME%%-" + _),
   libraryDependencies ++= Seq(
